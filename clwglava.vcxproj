@@ -71,8 +71,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\roysp\Projects\clwglava\thirdparty\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\roysp\Projects\clwglava\thirdparty\libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\roysp\Projects\clwglava\src\include;C:\Users\roysp\Projects\clwglava\thirdparty\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\roysp\Projects\clwglava\thirdparty\libs;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>C:\Users\roysp\Projects\clwglava\src\include;C:\Users\roysp\Projects\clwglava\thirdparty\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\roysp\Projects\clwglava\thirdparty\libs;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -108,12 +112,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glew32s.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <Profile>true</Profile>
+      <Profile>false</Profile>
+      <AdditionalDependencies>opengl32.lib;glew32s.lib;glfw3.lib;$(CoreLibraryDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -134,18 +139,19 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;glew32s.lib;glfw3.lib;$(CoreLibraryDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AudioCapture.cpp" />
-    <ClCompile Include="clwglava.cpp" />
-    <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="RingBuf.cpp" />
+    <ClCompile Include="src\AudioCapture.cpp" />
+    <ClCompile Include="src\clwglava.cpp" />
+    <ClCompile Include="src\Renderer.cpp" />
+    <ClCompile Include="src\RingBuf.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AudioCapture.h" />
-    <ClInclude Include="Renderer.h" />
-    <ClInclude Include="RingBuf.h" />
+    <ClInclude Include="src\include\AudioCapture.h" />
+    <ClInclude Include="src\include\Renderer.h" />
+    <ClInclude Include="src\include\RingBuf.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

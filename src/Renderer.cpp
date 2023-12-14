@@ -158,7 +158,6 @@ Renderer::~Renderer() {
 void Renderer::Begin() {
     // Use shader program
     glUseProgram(shaderProgram);
-    glfwPollEvents();
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     mNumRects = 0;
@@ -189,12 +188,6 @@ void Renderer::DrawRect(Rect rect, Color bcolor, Color tcolor) {
     // Create vertices
     mNumRects++;
     glBindVertexArray(VAO);
-    /* float vertices[] = {
-        rect.x, rect.y, bcolor.r, bcolor.g, bcolor.b, bcolor.a, tcolor.r, tcolor.g, tcolor.b, tcolor.a,
-        rect.x + rect.w, rect.y, bcolor.r, bcolor.g, bcolor.b, bcolor.a, tcolor.r, tcolor.g, tcolor.b, tcolor.a,
-        rect.x + rect.w, rect.y + rect.h, bcolor.r, bcolor.g, bcolor.b, bcolor.a, tcolor.r, tcolor.g, tcolor.b, tcolor.a,
-        rect.x, rect.y + rect.h, bcolor.r, bcolor.g, bcolor.b, bcolor.a, tcolor.r, tcolor.g, tcolor.b, tcolor.a};
-*/
     float cosRot = cos(rect.rot);
     float sinRot = sin(rect.rot);
 
@@ -213,7 +206,7 @@ void Renderer::DrawRect(Rect rect, Color bcolor, Color tcolor) {
 }
 
 void hide_taskbar_icon(GLFWwindow* win) {
-    FreeConsole();
+    //FreeConsole();
     glfwHideWindow(win);
     SetWindowLong(glfwGetWin32Window(win), GWL_EXSTYLE, WS_EX_TOOLWINDOW);
     glfwShowWindow(win);
