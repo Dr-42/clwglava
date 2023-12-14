@@ -8,6 +8,8 @@ RingBuf::RingBuf(unsigned int size) {
     this->size = size;
     this->buf = new float[size];
     this->fft_buf = new std::complex<float>[size];
+    this->fft_size = 0;
+    this->max_amp = 0.0f;
     // Set all values to 0
     for (unsigned int i = 0; i < size; i++) {
         this->buf[i] = 0;
@@ -26,13 +28,13 @@ void RingBuf::Push(float val) {
     this->index = (this->index + 1) % this->size;
 }
 
-void RingBuf::Cat(float* vals, int num) {
+void RingBuf::Cat(float* vals, uint64_t num) {
     for (int i = 0; i < num; i++) {
         this->Push(vals[i]);
     }
 }
 
-float RingBuf::Get(int index) {
+float RingBuf::Get(size_t index) {
     return this->buf[(this->index + index) % this->size];
 }
 
@@ -44,7 +46,7 @@ unsigned int RingBuf::GetIndex() {
     return this->index;
 }
 
-float RingBuf::operator[](int index) {
+float RingBuf::operator[](size_t index) {
     return this->Get(index);
 }
 
@@ -111,7 +113,7 @@ void RingBuf::fft_analyze(uint32_t factor, float dt) {
 	fft_size = m;
 }
 
-float RingBuf::get_fft(int index) {
+float RingBuf::get_fft(size_t index) {
     return std::abs(this->fft_buf[index]);
 }
 

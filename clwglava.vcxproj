@@ -149,9 +149,16 @@
     <ClCompile Include="src\RingBuf.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="src\include\AudioCapture.h" />
     <ClInclude Include="src\include\Renderer.h" />
     <ClInclude Include="src\include\RingBuf.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\icon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

@@ -11,14 +11,14 @@ int main() {
     Renderer renderer = Renderer();
     RingBuf rb = RingBuf(15000);
     float dt = 0.0f;
-    float monitor_width = glfwGetVideoMode(glfwGetPrimaryMonitor())->width;
-    float monitor_height = glfwGetVideoMode(glfwGetPrimaryMonitor())->height;
+    float monitor_width = (float)glfwGetVideoMode(glfwGetPrimaryMonitor())->width;
+    float monitor_height = (float)glfwGetVideoMode(glfwGetPrimaryMonitor())->height;
     float center_x = 0.0f;
     float center_y = 580.0f;
     float radius = 400.0f;
     float volume;
     while (!glfwWindowShouldClose(renderer.window)) {
-        float time = glfwGetTime();
+        float time = (float)glfwGetTime();
         volume = ac.volume;
         glfwPollEvents();
         if (glfwGetKey(renderer.window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
@@ -34,7 +34,7 @@ int main() {
         rb.fft_analyze(40, dt);
         for (UINT32 i = 0; i < rb.fft_size; i++) {
             float sample = rb.get_fft(rb.fft_size - i - 1);
-            float sample_angle = (((float)i / (float)rb.fft_size) * 2.0f * PI) + PI;
+            float sample_angle = (float)(((float)i / (float)rb.fft_size) * 2.0f * PI) + PI;
             float x = (center_x + radius * cos(sample_angle/2))/monitor_height ;
             float y = (center_y + radius * sin(sample_angle/2))/monitor_height;
             float w = 1.0f / (float)rb.fft_size;

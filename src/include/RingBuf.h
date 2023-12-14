@@ -10,14 +10,14 @@ public:
     RingBuf(unsigned int size);
     ~RingBuf();
     void Push(float val);
-    void Cat(float* vals, int num);
-    float Get(int index);
+    void Cat(float* vals, uint64_t num);
+    float Get(size_t index);
     unsigned int GetSize();
     unsigned int GetIndex();
-    float operator[](int index);
+    float operator[](size_t index);
 	// Larger facter = lower fft_size
     void fft_analyze(uint32_t factor, float dt);
-    float get_fft(int index);
+    float get_fft(size_t index);
     size_t fft_size;
     float max_amp;
 private:

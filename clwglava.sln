@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "clwglava", "clwglava.vcxproj", "{716E3675-8509-426E-A737-4521BEC71443}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "wglava", "wglava\wglava.vdproj", "{EF51FFDA-0475-4A6A-BA00-B3ECD7DA5E05}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,13 @@ Global
 		{716E3675-8509-426E-A737-4521BEC71443}.Release|x64.Build.0 = Release|x64
 		{716E3675-8509-426E-A737-4521BEC71443}.Release|x86.ActiveCfg = Release|Win32
 		{716E3675-8509-426E-A737-4521BEC71443}.Release|x86.Build.0 = Release|Win32
+		{EF51FFDA-0475-4A6A-BA00-B3ECD7DA5E05}.Debug|x64.ActiveCfg = Debug
+		{EF51FFDA-0475-4A6A-BA00-B3ECD7DA5E05}.Debug|x86.ActiveCfg = Debug
+		{EF51FFDA-0475-4A6A-BA00-B3ECD7DA5E05}.Debug|x86.Build.0 = Debug
+		{EF51FFDA-0475-4A6A-BA00-B3ECD7DA5E05}.Release|x64.ActiveCfg = Release
+		{EF51FFDA-0475-4A6A-BA00-B3ECD7DA5E05}.Release|x64.Build.0 = Release
+		{EF51FFDA-0475-4A6A-BA00-B3ECD7DA5E05}.Release|x86.ActiveCfg = Release
+		{EF51FFDA-0475-4A6A-BA00-B3ECD7DA5E05}.Release|x86.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
