@@ -206,7 +206,7 @@ void Renderer::DrawRect(Rect rect, Color bcolor, Color tcolor) {
 }
 
 void hide_taskbar_icon(GLFWwindow* win) {
-    //FreeConsole();
+    FreeConsole();
     glfwHideWindow(win);
     SetWindowLong(glfwGetWin32Window(win), GWL_EXSTYLE, WS_EX_TOOLWINDOW);
     glfwShowWindow(win);
