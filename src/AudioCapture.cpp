@@ -1,5 +1,7 @@
 #include "AudioCapture.h"
+#include "Timer.h"
 #include <system_error>
+#include <chrono>
 
 #define SAFE_RELEASE(punk)  \
 if ((punk) != NULL)  \

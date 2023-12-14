@@ -15,27 +15,27 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="clwglava.cpp">
+    <ClCompile Include="src\clwglava.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AudioCapture.cpp">
+    <ClCompile Include="src\AudioCapture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RingBuf.cpp">
+    <ClCompile Include="src\RingBuf.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer.cpp">
+    <ClCompile Include="src\Renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AudioCapture.h">
+    <ClInclude Include="src\include\AudioCapture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RingBuf.h">
+    <ClInclude Include="src\include\RingBuf.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer.h">
+    <ClInclude Include="src\include\Renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
