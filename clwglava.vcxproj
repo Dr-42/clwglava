@@ -147,12 +147,14 @@
     <ClCompile Include="src\clwglava.cpp" />
     <ClCompile Include="src\Renderer.cpp" />
     <ClCompile Include="src\RingBuf.cpp" />
+    <ClCompile Include="src\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
     <ClInclude Include="src\include\AudioCapture.h" />
     <ClInclude Include="src\include\Renderer.h" />
     <ClInclude Include="src\include\RingBuf.h" />
+    <ClInclude Include="src\include\Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

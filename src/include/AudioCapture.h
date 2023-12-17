@@ -36,6 +36,4 @@ private:
 	UINT32 numFramesAvailable;
 	WORD wBitsPerSample;
 	WORD wChannels;
-
-	void winfatal_error(HRESULT hr, const char* fmt, ...);
 };

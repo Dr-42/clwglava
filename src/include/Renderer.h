@@ -6,12 +6,10 @@
 #include <cstdint>
 #include <vector>
 
+#include "Utils.h"
+
 struct Rect {
     float x, y, w, h, rot;
-};
-
-struct Color {
-    float r, g, b, a;
 };
 
 class Renderer {
