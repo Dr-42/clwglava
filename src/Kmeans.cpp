@@ -1,5 +1,7 @@
 #include "Kmeans.h"
 
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
 #include <ctime>
@@ -12,6 +14,13 @@ Kmeans::Kmeans(std::string imagePath, uint32_t iters){
     int channels;
     this->data = stbi_load(imagePath.c_str(), &this->width, &this->height, &channels, 4);
     const int size = width * height;
+
+    glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+    GLFWwindow* window = glfwCreateWindow(1, 1, "", nullptr, nullptr);
+    glfwMakeContextCurrent(window);
+
     std::string computeFile = "assets/compute.glsl";
     computeShader = new ComputeShader(computeFile);
     texture = new Texture(width, height, data);

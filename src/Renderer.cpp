@@ -156,6 +156,7 @@ Renderer::~Renderer() {
 }
 
 void Renderer::Begin() {
+    glfwMakeContextCurrent(window);
     // Use shader program
     glUseProgram(shaderProgram);
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
