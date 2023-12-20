@@ -1,9 +1,9 @@
 #include "AudioCapture.h"
 #include "Renderer.h"
 #include "RingBuf.h"
+#include "Wallcolor.h"
 #include <GLFW/glfw3.h>
 #include <cstdint>
-
 #define FPS 120
 
 int main() {
@@ -17,6 +17,10 @@ int main() {
     float center_y = 580.0f;
     float radius = 400.0f;
     float volume;
+    Wallcolor wc = Wallcolor();
+    std::vector<Color> colors = wc.getColors();
+    size_t colorindex = 0;
+    size_t checkindex = 0;
     while (!glfwWindowShouldClose(renderer.window)) {
         float time = (float)glfwGetTime();
         volume = ac.volume;
@@ -27,6 +31,12 @@ int main() {
         if (glfwGetKey(renderer.window, GLFW_KEY_R) == GLFW_PRESS) {
             renderer.LoadShader();
             printf("Reloaded shader\n");
+        }
+        checkindex++;
+        if (checkindex % 10000) {
+            if (wc.checkChange()) {
+                colors = wc.getColors();
+            }
         }
         renderer.Begin();
         uint64_t num_frames = ac.fill_buffer();
@@ -43,8 +53,14 @@ int main() {
             float h = volume * radius * sample/sqrt(monitor_width * monitor_width);
             Rect rect = {x, y, w, h, rect_angle};
             Rect rect2 = {-x, y, w, h, -(rect_angle)};
-            Color bcolor = {0.0f, 1.0f, 1.0f, 1.0f};
-            Color tcolor = {1.0f, 0.0f, 1.0f, 1.0f};
+            //Color bcolor = {0.0f, 1.0f, 1.0f, 1.0f};
+            //Color tcolor = {1.0f, 0.0f, 1.0f, 1.0f};
+            Color bcolor = colors[colorindex];
+            Color tcolor = colors[colorindex + 1];
+            colorindex += 2;
+            if (colorindex >= colors.size() - 1) {
+                colorindex = 0;
+            }
             renderer.DrawRect(rect, bcolor, tcolor);
             renderer.DrawRect(rect2, bcolor, tcolor);
         }

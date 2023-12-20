@@ -14,3 +14,8 @@ void Utils::winfatal_error(HRESULT hr, const char* fmt, ...) {
 		fprintf(stderr, "Error: %s\n", message.c_str());
 	}
 }
+
+std::string Utils::wstring_to_string(const std::wstring& wstr){
+	std::string str(wstr.begin(), wstr.end());
+	return str;
+}

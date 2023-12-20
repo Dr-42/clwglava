@@ -145,22 +145,43 @@
   <ItemGroup>
     <ClCompile Include="src\AudioCapture.cpp" />
     <ClCompile Include="src\clwglava.cpp" />
+    <ClCompile Include="src\Kmeans.cpp" />
     <ClCompile Include="src\Renderer.cpp" />
     <ClCompile Include="src\RingBuf.cpp" />
+    <ClCompile Include="src\shaderUtils\Atomic.cpp" />
+    <ClCompile Include="src\shaderUtils\ComputeShader.cpp" />
+    <ClCompile Include="src\shaderUtils\Ssbo.cpp" />
+    <ClCompile Include="src\shaderUtils\Texture.cpp" />
     <ClCompile Include="src\Utils.cpp" />
+    <ClCompile Include="src\Wallcolor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
     <ClInclude Include="src\include\AudioCapture.h" />
+    <ClInclude Include="src\include\Kmeans.h" />
     <ClInclude Include="src\include\Renderer.h" />
     <ClInclude Include="src\include\RingBuf.h" />
+    <ClInclude Include="src\include\shaderUtils\Atomic.h" />
+    <ClInclude Include="src\include\shaderUtils\ComputeShader.h" />
+    <ClInclude Include="src\include\shaderUtils\Ssbo.h" />
+    <ClInclude Include="src\include\shaderUtils\Texture.h" />
     <ClInclude Include="src\include\Utils.h" />
+    <ClInclude Include="src\include\Wallcolor.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\compute.glsl" />
+    <None Include="assets\fragment.glsl" />
+    <None Include="assets\vertex.glsl" />
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="LICENSE.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
