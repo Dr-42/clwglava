@@ -10,7 +10,7 @@
 int main() {
     auto ac = AudioCapture();
     Renderer renderer = Renderer();
-    RingBuf rb = RingBuf(20000);
+    RingBuf rb = RingBuf(15000);
     float dt = 0.0f;
     float monitor_width = (float)glfwGetVideoMode(glfwGetPrimaryMonitor())->width;
     float monitor_height = (float)glfwGetVideoMode(glfwGetPrimaryMonitor())->height;
@@ -54,7 +54,7 @@ int main() {
         renderer.Begin();
         uint64_t num_frames = ac.fill_buffer();
         rb.Cat(ac.get_data(), num_frames);
-        rb.fft_analyze(40, dt / 100);
+        rb.fft_analyze(20, dt);
         for (UINT32 i = 0; i < rb.fft_size; i++) {
             float sample = rb.get_fft(rb.fft_size - i - 1);
             float sample_angle = (float)(((float)i / (float)rb.fft_size) * 2.0f * PI) + PI;

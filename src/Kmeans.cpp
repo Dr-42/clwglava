@@ -72,6 +72,14 @@ std::vector<Color> Kmeans::GetColors(){
         this->counts->GetData(this->numCentroids, countsData);
         this->newCentroids->GetData(this->numCentroids * 3, newCentroidsData);
 
+        // Check if converged
+        auto res = std::memcmp(this->centroidData, newCentroidsData, this->numCentroids * 3 * sizeof(uint32_t));
+        if (res == 0) {
+            delete [] countsData;
+            delete [] newCentroidsData;
+			break;
+		}
+
 		for (size_t i = 0; i < this->numCentroids; i++) {
 			if (countsData[i] == 0) {
 				size_t rand_index = rand() % (this->width * this->height);
