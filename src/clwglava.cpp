@@ -36,7 +36,7 @@ int main() {
             printf("Reloaded shader\n");
         }
         checkindex++;
-        if (checkindex > 10000) {
+        if (checkindex % 10000) {
             if (wc.checkChange()) {
                 colors_future = std::async(std::launch::async, &Wallcolor::getColors, &wc);
                 launched = true;
