@@ -1,14 +1,16 @@
 #pragma once
 
+#ifdef _WIN64
 #include <initguid.h>
 #include <windows.h>
 #include <mmdeviceapi.h>
 #include <winnt.h>
-#include <stdio.h>
 #include <endpointvolume.h>
 #include <audioclient.h>
+#endif
 
 #include <cstdint>
+#include <stdio.h>
 
 constexpr auto REFTIMES_PER_SEC = 10000000;
 constexpr auto REFTIMES_PER_MILLISEC = 10000;
@@ -23,6 +25,7 @@ public:
 private:
 	uint64_t data_length;
 	float* data;
+	#ifdef _WIN64
 	IMMDeviceEnumerator* pEnumerator = NULL;
 	WAVEFORMATEX* pwfx = NULL;
 	IMMDevice* pDevice = NULL;
@@ -36,4 +39,5 @@ private:
 	UINT32 numFramesAvailable;
 	WORD wBitsPerSample;
 	WORD wChannels;
+	#endif
 };

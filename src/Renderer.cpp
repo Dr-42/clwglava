@@ -1,9 +1,11 @@
 #include "Renderer.h"
 
+#ifdef _WIN64
 #define GLFW_EXPOSE_NATIVE_WIN32
+#include <windows.h>
+#endif
 #include <GLFW/glfw3.h>
 #include <GLFW/glfw3native.h>
-#include <windows.h>
 #include <cmath>
 #include <cstdio>
 #include <string>
@@ -207,8 +209,10 @@ void Renderer::DrawRect(Rect rect, Color bcolor, Color tcolor) {
 }
 
 void hide_taskbar_icon(GLFWwindow* win) {
+    #ifdef _WIN64
     FreeConsole();
     glfwHideWindow(win);
     SetWindowLong(glfwGetWin32Window(win), GWL_EXSTYLE, WS_EX_TOOLWINDOW);
     glfwShowWindow(win);
+    #endif
 }

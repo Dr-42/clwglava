@@ -1,3 +1,4 @@
+#ifdef _WIN64
 #include "AudioCapture.h"
 #include <system_error>
 #include <chrono>
@@ -105,3 +106,4 @@ AudioCapture::~AudioCapture(){
 float* AudioCapture::get_data(){
 	return data;
 }
+#endif

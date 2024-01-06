@@ -1,3 +1,4 @@
+#ifdef _WIN64
 #include "Wallcolor.h"
 
 #include "Kmeans.h"
@@ -38,3 +39,4 @@ std::vector<Color> Wallcolor::getColors()
 	auto colors = kmeans.GetColors();
 	return colors;
 }
+#endif

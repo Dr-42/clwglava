@@ -55,7 +55,7 @@ int main() {
         uint64_t num_frames = ac.fill_buffer();
         rb.Cat(ac.get_data(), num_frames);
         rb.fft_analyze(20, dt);
-        for (UINT32 i = 0; i < rb.fft_size; i++) {
+        for (uint32_t i = 0; i < rb.fft_size; i++) {
             float sample = rb.get_fft(rb.fft_size - i - 1);
             float sample_angle = (float)(((float)i / (float)rb.fft_size) * 2.0f * PI) + PI;
             float x = (center_x + radius * cos(sample_angle/2))/monitor_height ;

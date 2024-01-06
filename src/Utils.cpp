@@ -4,6 +4,7 @@
 #include <string>
 #include <system_error>
 
+#ifdef _WIN64
 void Utils::winfatal_error(HRESULT hr, const char* fmt, ...) {
 	if (FAILED(hr)) {
 		std::string message = std::system_category().message(hr);
@@ -14,6 +15,7 @@ void Utils::winfatal_error(HRESULT hr, const char* fmt, ...) {
 		fprintf(stderr, "Error: %s\n", message.c_str());
 	}
 }
+#endif
 
 std::string Utils::wstring_to_string(const std::wstring& wstr){
 	std::string str(wstr.begin(), wstr.end());
