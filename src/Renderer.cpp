@@ -21,7 +21,9 @@ Renderer::Renderer() {
     glfwWindowHint(GLFW_DECORATED, false);
     glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, true);
     glfwWindowHint(GLFW_FOCUSED, GLFW_FALSE);
+    #ifdef _WIN64
     glfwWindowHint(GLFW_SAMPLES, 4);
+    #endif
 
     auto monitor_width = glfwGetVideoMode(glfwGetPrimaryMonitor())->width;
     auto monitor_height = glfwGetVideoMode(glfwGetPrimaryMonitor())->height;
@@ -38,7 +40,9 @@ Renderer::Renderer() {
     glViewport(0, 0, monitor_height, monitor_height);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    #ifdef _WIN64
     glEnable(GL_MULTISAMPLE);
+    #endif
 
     LoadShader();
 
