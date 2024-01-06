@@ -9,6 +9,10 @@
 #include <audioclient.h>
 #endif
 
+#ifdef __linux__
+#include <alsa/asoundlib.h>
+#endif
+
 #include <cstdint>
 #include <stdio.h>
 
@@ -39,5 +43,11 @@ private:
 	UINT32 numFramesAvailable;
 	WORD wBitsPerSample;
 	WORD wChannels;
+	#endif
+	#ifdef __linux__
+    snd_pcm_t *pcmHandle;
+    snd_pcm_uframes_t bufferFrameCount;
+    size_t wBitsPerSample;
+    size_t wChannels;
 	#endif
 };
