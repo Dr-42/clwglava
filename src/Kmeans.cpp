@@ -106,8 +106,8 @@ std::vector<Color> Kmeans::GetColors(){
 
     std::vector<Color> colors;
     for (size_t i = 0; i < this->numCentroids; i++) {
-        Color col = {0};
-		col.r = (float)this->centroidData[i * 3 + 0] / 256.0f;
+        Color col;
+        col.r = (float)this->centroidData[i * 3 + 0] / 256.0f;
         col.g = (float)this->centroidData[i * 3 + 1] / 256.0f;
         col.b = (float)this->centroidData[i * 3 + 2] / 256.0f;
         col.a = 1.0f;

@@ -29,7 +29,7 @@ void RingBuf::Push(float val) {
 }
 
 void RingBuf::Cat(float* vals, uint64_t num) {
-    for (int i = 0; i < num; i++) {
+    for (uint64_t i = 0; i < num; i++) {
         this->Push(vals[i]);
     }
 }

@@ -4,11 +4,16 @@
 #define GLFW_EXPOSE_NATIVE_WIN32
 #include <windows.h>
 #endif
+#ifdef __linux__
+#define GLFW_EXPOSE_NATIVE_X11
+#include <X11/Xlib.h>
+#endif
 #include <GLFW/glfw3.h>
 #include <GLFW/glfw3native.h>
 #include <cmath>
 #include <cstdio>
 #include <string>
+#include <cstring>
 #include <fstream>
 
 void hide_taskbar_icon(GLFWwindow* window);
@@ -212,11 +217,29 @@ void Renderer::DrawRect(Rect rect, Color bcolor, Color tcolor) {
     mIndices.insert(mIndices.end(), indices, indices + ARR_LEN(indices));
 }
 
+#ifdef _WIN64
 void hide_taskbar_icon(GLFWwindow* win) {
-    #ifdef _WIN64
     FreeConsole();
     glfwHideWindow(win);
     SetWindowLong(glfwGetWin32Window(win), GWL_EXSTYLE, WS_EX_TOOLWINDOW);
     glfwShowWindow(win);
-    #endif
 }
+#endif
+#ifdef __linux__
+void hide_taskbar_icon(GLFWwindow* window) {
+    Window win = glfwGetX11Window(window);
+    Display* display = glfwGetX11Display();
+    XEvent xev;
+    Atom _NET_WM_STATE = XInternAtom(display, "_NET_WM_STATE", False);
+    Atom _NET_WM_STATE_SKIP_TASKBAR = XInternAtom(display, "_NET_WM_STATE_SKIP_TASKBAR", False);
+    memset(&xev, 0, sizeof(xev));
+    xev.type = ClientMessage;
+    xev.xclient.window = win;
+    xev.xclient.message_type = _NET_WM_STATE;
+    xev.xclient.format = 32;
+    xev.xclient.data.l[0] = 1;
+    xev.xclient.data.l[1] = _NET_WM_STATE_SKIP_TASKBAR;
+    xev.xclient.data.l[2] = 0;
+    XSendEvent(display, DefaultRootWindow(display), False, SubstructureRedirectMask | SubstructureNotifyMask, &xev);
+}
+#endif

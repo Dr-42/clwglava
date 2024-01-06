@@ -29,7 +29,7 @@ AudioCapture::AudioCapture() {
     }
 
     // Set format (assuming 16-bit signed little-endian)
-    if ((err = snd_pcm_hw_params_set_format(pcmHandle, params, SND_PCM_FORMAT_S16_LE)) < 0) {
+    if ((err = snd_pcm_hw_params_set_format(pcmHandle, params, SND_PCM_FORMAT_FLOAT_LE)) < 0) {
         fprintf(stderr, "Error setting format: %s\n", snd_strerror(err));
         // Handle error
     }
@@ -59,6 +59,7 @@ AudioCapture::AudioCapture() {
     // Allocate memory for audio data
     data_length = bufferFrameCount * 2; // Assuming 2 channels
     data = new float[data_length];
+    volume = 1.0f;
 }
 
 uint64_t AudioCapture::fill_buffer() {

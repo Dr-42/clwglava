@@ -45,9 +45,7 @@ private:
 	WORD wChannels;
 	#endif
 	#ifdef __linux__
-    snd_pcm_t *pcmHandle;
-    snd_pcm_uframes_t bufferFrameCount;
-    size_t wBitsPerSample;
-    size_t wChannels;
+	snd_pcm_t *pcmHandle;
+	snd_pcm_uframes_t bufferFrameCount;
 	#endif
 };
