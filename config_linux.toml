@@ -2,10 +2,10 @@
 compiler = "clang++"
 
 [[targets]]
-name = "imeye"
+name = "lglava"
 src = "./src/"
 include_dir = "./src/include/"
 type = "exe"
 cflags = " -g -Wall -Wextra"
-libs = "-lm -lGLEW -lglfw -lGL"
+libs = "-lm -lGLEW -lglfw -lGL -lasound"
 deps = [""]

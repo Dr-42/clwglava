@@ -80,16 +80,4 @@ AudioCapture::~AudioCapture() {
 float *AudioCapture::get_data() {
     return data;
 }
-
-int main() {
-    AudioCapture audioCapture;
-
-    while (true) {
-        uint64_t framesRead = audioCapture.fill_buffer();
-        // Process or use the audio data as needed
-    }
-
-    return 0;
-}
-
 #endif
