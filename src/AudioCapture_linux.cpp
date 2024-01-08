@@ -54,24 +54,31 @@ AudioCapture::AudioCapture() {
     }
 
     pa_simple_ = s;
-    data_length = sample_spec.channels * 512; // Adjust the buffer size as needed
+    data_length = sample_spec.channels * 996; // Adjust the buffer size as needed
     data = new float[data_length];
     volume = 1.0;
 }
 
 uint64_t AudioCapture::fill_buffer() {
-    int error;
+    int error = 0;
     ssize_t r;
 
     // Read audio data
-    r = pa_simple_read(pa_simple_, data, data_length * sizeof(float), &error);
-
-    if (r < 0) {
-        fprintf(stderr, "pa_simple_read() failed: %s\n", pa_strerror(error));
+    //r = pa_simple_read(pa_simple_, data, data_length * sizeof(float), &error);
+    if (read_future.valid()) {
+        if (read_future.wait_for(std::chrono::milliseconds(0)) == std::future_status::ready) {
+            r = read_future.get();
+            if (r < 0) {
+                fprintf(stderr, __FILE__": pa_simple_read() failed: %s\n", pa_strerror(error));
+                return 0;
+            }
+            return data_length;
+        } else {
+            return 0;
+        }
+    } else {
+        read_future = std::async(std::launch::async, &pa_simple_read, pa_simple_, data, data_length * sizeof(float), &error);
         return 0;
-    }
-    for (size_t i = 0; i < data_length; i++) {
-        data[i] *= 100.0f;
     }
     return data_length;
 }

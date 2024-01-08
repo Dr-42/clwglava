@@ -12,6 +12,7 @@
 #ifdef __linux__
 #include <pulse/simple.h>
 #include <pulse/error.h>
+#include <future>
 #endif
 
 #include <cstdint>
@@ -46,7 +47,8 @@ private:
 	WORD wChannels;
 	#endif
 	#ifdef __linux__
-    pa_simple *pa_simple_;
-    pa_sample_spec sample_spec;
+	pa_simple *pa_simple_;
+	pa_sample_spec sample_spec;
+	std::future<int> read_future;
 	#endif
 };

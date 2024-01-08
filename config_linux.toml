@@ -6,6 +6,6 @@ name = "lglava"
 src = "./src/"
 include_dir = "./src/include/"
 type = "exe"
-cflags = " -g -Wall -Wextra"
+cflags = "-O3 -Wall -Wextra -std=c++17"
 libs = "-lm -lGLEW -lglfw -lGL -lX11 -lpulse -lpulse-simple"
 deps = [""]
