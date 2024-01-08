@@ -6,6 +6,22 @@
 #include <unistd.h>
 #include <cstring>
 #include <cstdio>
+#include <memory>
+#include <stdexcept>
+#include <array>
+
+std::string exec(const char* cmd) {
+    std::array<char, 128> buffer;
+    std::string result;
+    std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd, "r"), pclose);
+    if (!pipe) {
+        throw std::runtime_error("popen() failed!");
+    }
+    while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) {
+        result += buffer.data();
+    }
+    return result;
+}
 
 AudioCapture::AudioCapture() {
     pa_simple *s = nullptr;
@@ -16,12 +32,15 @@ AudioCapture::AudioCapture() {
     sample_spec.channels = 2;
     sample_spec.rate = 44100;
 
+    std::string device = exec("pactl get-default-sink");
+    device += ".monitor";
+
     // Create a new playback stream
     s = pa_simple_new(
         NULL,
         "AudioCapture",
         PA_STREAM_RECORD,
-        "bluez_output.C8_31_DB_58_26_65.1.monitor",
+        device.c_str(),
         "Record",
         &sample_spec,
         NULL,
