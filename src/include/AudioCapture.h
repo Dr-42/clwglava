@@ -10,7 +10,8 @@
 #endif
 
 #ifdef __linux__
-#include <alsa/asoundlib.h>
+#include <pulse/simple.h>
+#include <pulse/error.h>
 #endif
 
 #include <cstdint>
@@ -45,7 +46,7 @@ private:
 	WORD wChannels;
 	#endif
 	#ifdef __linux__
-	snd_pcm_t *pcmHandle;
-	snd_pcm_uframes_t bufferFrameCount;
+    pa_simple *pa_simple_;
+    pa_sample_spec sample_spec;
 	#endif
 };
