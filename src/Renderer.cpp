@@ -26,6 +26,8 @@ Renderer::Renderer() {
     glfwWindowHint(GLFW_DECORATED, false);
     glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, true);
     glfwWindowHint(GLFW_FOCUSED, GLFW_FALSE);
+
+    glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_FALSE);
     #ifdef _WIN64
     glfwWindowHint(GLFW_SAMPLES, 4);
     #endif
@@ -35,6 +37,7 @@ Renderer::Renderer() {
     window = glfwCreateWindow(monitor_height, monitor_height, "Audio Visualizer", nullptr, nullptr);
     glfwSetWindowPos(window, (monitor_width - monitor_height) / 2, 0);
     glfwMakeContextCurrent(window);
+    glfwSwapInterval(0);
     hide_taskbar_icon(window);
 
     // Initialize GLEW
@@ -191,7 +194,8 @@ void Renderer::End() {
     // Clear buffers
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
-    glfwSwapBuffers(window);
+    //glfwSwapBuffers(window);
+    glFlush();
 }
 
 #define ARR_LEN(x) (sizeof(x) / sizeof(x[0]))

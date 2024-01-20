@@ -7,10 +7,21 @@
 #include <cstring>
 #include <ctime>
 
+static unsigned int g_seed;
+
+// Used to seed the generator.           
+inline void fast_srand(int seed) {
+    g_seed = seed;
+}
+
+inline int fast_rand(void) {
+    g_seed = (214013*g_seed+2531011);
+    return (g_seed>>16)&0x7FFF;
+}
+
 Kmeans::Kmeans(std::string imagePath, uint32_t iters){
     this->iters = iters;
     this->numCentroids = 10;
-    srand(time(NULL));
     // Initialize data
     int channels;
     this->data = stbi_load(imagePath.c_str(), &this->width, &this->height, &channels, 4);
@@ -19,8 +30,10 @@ Kmeans::Kmeans(std::string imagePath, uint32_t iters){
     glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+    glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_FALSE);
     GLFWwindow* window = glfwCreateWindow(1, 1, "", nullptr, nullptr);
     glfwMakeContextCurrent(window);
+    glfwSwapInterval(0);
 
     std::string computeFile = "assets/compute.glsl";
     computeShader = new ComputeShader(computeFile);
@@ -36,7 +49,7 @@ Kmeans::Kmeans(std::string imagePath, uint32_t iters){
     memset(countsData, 0, this->numCentroids * sizeof(uint32_t));
     memset(newCentroidsData, 0, this->numCentroids * 3 * sizeof(uint32_t));
     for (size_t i = 0; i < this->numCentroids; i++) {
-        size_t randIndex = rand() % size;
+        size_t randIndex = fast_rand() % size;
         this->centroidData[i * 3] = data[randIndex * 4];
         this->centroidData[i * 3 + 1] = data[randIndex * 4 + 1];
         this->centroidData[i * 3 + 2] = data[randIndex * 4 + 2];
@@ -46,6 +59,9 @@ Kmeans::Kmeans(std::string imagePath, uint32_t iters){
     this->centroids->SetData(this->numCentroids * 3, this->centroidData);
     delete [] countsData;
     delete [] newCentroidsData;
+
+    // Seed random
+    fast_srand(time(NULL));
 } 
 
 Kmeans::~Kmeans(){
@@ -83,7 +99,7 @@ std::vector<Color> Kmeans::GetColors(){
 
 		for (size_t i = 0; i < this->numCentroids; i++) {
 			if (countsData[i] == 0) {
-				size_t rand_index = rand() % (this->width * this->height);
+				size_t rand_index = fast_rand() % (this->width * this->height);
 				this->centroidData[i * 3 + 0] = data[rand_index * 4 + 0];
 				this->centroidData[i * 3 + 1] = data[rand_index * 4 + 1];
 				this->centroidData[i * 3 + 2] = data[rand_index * 4 + 2];
@@ -102,7 +118,7 @@ std::vector<Color> Kmeans::GetColors(){
         this->counts->SetData(this->numCentroids, countsData);
         delete [] countsData;
         delete [] newCentroidsData;
-	}
+    }
 
     std::vector<Color> colors;
     for (size_t i = 0; i < this->numCentroids; i++) {
